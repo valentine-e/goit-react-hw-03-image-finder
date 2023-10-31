@@ -5,37 +5,40 @@ import { toast } from 'react-toastify';
 
 export default class Searchbar extends Component {
   state = {
-    localQuery: '',
+    queryName: '',
   };
 
   handleChange = e => {
-    this.setState({ localQuery: e.target.value.toLowerCase() });
+    this.setState({ queryName: e.target.value.toLowerCase() });
   };
 
   handleSubmit = e => {
     e.preventDefault();
 
-    if (this.state.localQuery.trim() === '') {
+    if (this.state.queryName.trim() === '') {
       toast.warn('No request...');
       return;
     }
 
-    this.props.onSubmit(this.state.localQuery);
-    this.setState({ localQuery: '' });
+    this.props.onSubmit(this.state.queryName);
+    this.setState({ queryName: '' });
   };
 
   render() {
+    const { queryName } = this.state;
     const { handleChange, handleSubmit } = this;
 
     return (
       <header className={style.Searchbar}>
         <form onSubmit={handleSubmit} className={style.Form}>
-          <button className={style.SearchForm_button}>
+          <button type="submit" className={style.SearchForm_button}>
             <BsSearch />
             <span className={style.SearchForm_button_label}>Search</span>
           </button>
 
           <input
+            value={queryName}
+            name="search"
             className={style.SearchForm_input}
             type="text"
             autoComplete="off"

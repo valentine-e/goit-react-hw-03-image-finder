@@ -2,7 +2,7 @@ import { Component } from 'react';
 import Searchbar from './Searchbar/Searchbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import Api from './api';
+import Api from './api';
 
 export class App extends Component {
   state = {
@@ -13,8 +13,8 @@ export class App extends Component {
     error: false,
   };
 
-  handleSearchSubmit = localQuery => {
-    this.setState({ queryName: localQuery });
+  handleSearchSubmit = queryName => {
+    this.setState({ queryName });
   };
 
   handleLoadMore = () => {
@@ -31,13 +31,13 @@ export class App extends Component {
   // }
 
   render() {
+    const { queryName } = this.state;
     const { handleSearchSubmit, handleLoadMore } = this;
 
     return (
       <div>
-        <Searchbar onSubmit={handleSearchSubmit} Search form />
-        {/* <Api requestName={this.state.queryName} /> */}
-        {this.state.images.length > 0 && <div>Rallery</div>}
+        <Searchbar onSubmit={handleSearchSubmit} />
+        <Api requestName={queryName} />
         <div>Loader</div>
         <button onClick={handleLoadMore}>Load more</button>
         <ToastContainer position="top-right" theme="colored" autoClose="3000" />
