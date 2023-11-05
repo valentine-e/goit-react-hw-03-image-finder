@@ -5,27 +5,27 @@ import { toast } from 'react-toastify';
 
 export default class Searchbar extends Component {
   state = {
-    queryName: '',
+    queryLocal: '',
   };
 
   handleChange = e => {
-    this.setState({ queryName: e.target.value.toLowerCase() });
+    this.setState({ queryLocal: e.target.value.toLowerCase() });
   };
 
   handleSubmit = e => {
     e.preventDefault();
 
-    if (this.state.queryName.trim() === '') {
+    if (this.state.queryLocal.trim() === '') {
       toast.warn('No request...');
       return;
     }
 
-    this.props.onSubmit(this.state.queryName);
-    this.setState({ queryName: '' });
+    this.props.onSubmit(this.state.queryLocal);
+    this.setState({ queryLocal: '' });
   };
 
   render() {
-    const { queryName } = this.state;
+    const { queryLocal } = this.state;
     const { handleChange, handleSubmit } = this;
 
     return (
@@ -37,7 +37,7 @@ export default class Searchbar extends Component {
           </button>
 
           <input
-            value={queryName}
+            value={queryLocal}
             name="search"
             className={style.SearchForm_input}
             type="text"
