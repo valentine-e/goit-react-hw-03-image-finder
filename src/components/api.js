@@ -27,18 +27,16 @@ export default class Api extends Component {
     // }
 
     if (prevRequestName !== newRequestName) {
-      console.log('+');
-
       this.setState({ loading: true });
       fetch(
         `https://pixabay.com/api/?q=${newRequestName}&page=1&key=33584802-e836107f470a1a46170cd6658&image_type=photo&orientation=horizontal&per_page=12`
       )
-        .then(res => res.json())
+        .then(response => response.json())
         .then(searchRequest => this.setState({ searchRequest }))
         .finally(() => this.setState({ loading: false }));
-
-      console.log(this.state.searchRequest);
     }
+
+    console.log(this.state.searchRequest);
   }
   render() {
     const { requestName } = this.props;
