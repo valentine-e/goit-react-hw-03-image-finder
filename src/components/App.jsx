@@ -2,6 +2,7 @@ import { Component } from 'react';
 import Searchbar from './Searchbar/Searchbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 import Api from './api';
 
 export class App extends Component {
@@ -31,13 +32,14 @@ export class App extends Component {
   // }
 
   render() {
-    const { queryName } = this.state;
+    const { queryName, loading, images } = this.state;
     const { handleSearchSubmit, handleLoadMore } = this;
 
     return (
       <div>
         <Searchbar onSubmit={handleSearchSubmit} />
-        <Api requestName={queryName} />
+        <ImageGallery images={images} request={queryName} />
+        <Api requestName={queryName} loading={loading} images={images} />
         <div>Loader</div>
         <button onClick={handleLoadMore}>Load more</button>
         <ToastContainer position="top-right" theme="colored" autoClose="3000" />

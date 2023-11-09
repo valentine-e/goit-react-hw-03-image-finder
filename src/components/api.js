@@ -1,5 +1,3 @@
-// import axios from 'axios';
-
 // console.log(axios.isCancel('something'));
 
 // const api = (axios.defaults.baseURL =
@@ -11,14 +9,15 @@ import { Component } from 'react';
 // const API_KEY = '33584802-e836107f470a1a46170cd6658';
 
 export default class Api extends Component {
-  state = {
-    searchRequest: null,
-    loading: false,
-  };
+  // state = {
+
+  //   loading: false,
+  // };
 
   componentDidUpdate(prevProps, prevState) {
     const prevRequestName = prevProps.requestName;
     const newRequestName = this.props.requestName;
+
     // if (
     //   this.state.query !== prevState.query ||
     //   this.state.page !== prevState.page
@@ -32,19 +31,20 @@ export default class Api extends Component {
         `https://pixabay.com/api/?q=${newRequestName}&page=1&key=33584802-e836107f470a1a46170cd6658&image_type=photo&orientation=horizontal&per_page=12`
       )
         .then(response => response.json())
-        .then(searchRequest => this.setState({ searchRequest }))
+        .then(requestName => this.setState({ requestName }))
         .finally(() => this.setState({ loading: false }));
     }
-
-    console.log(this.state.searchRequest);
   }
+
   render() {
     const { requestName } = this.props;
+    // const { requestName } = this.state;
     return (
       <div>
         <h1>image request</h1>
-        {this.state.searchRequest === null && <div>Entes request</div>}
-        {this.props.requestName && <p>{requestName}</p>}
+        {requestName === null && <div>Entes request</div>}
+        {requestName && <p>{requestName}</p>}
+        {/* <p>{this.state.requestName}</p> */}
       </div>
     );
   }
